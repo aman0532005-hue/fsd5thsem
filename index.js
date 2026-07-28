@@ -38,18 +38,111 @@
 // }
 // sumWithMsg(sum," and i am aman")
 
-function login(msg,error){
-    if(error){
-        console.log("error is " + error)
+// function login(msg,error){
+//     if(error){
+//         console.log("error is " + error)
+//     }else{
+//         console.log("msg is " + msg)
+//     }
+// }
+// function loginhandler(username,password,callback){
+//     if(username == "ptomer40" && password == "123"){
+//         callback(" success",null)
+//     }else{
+//         callback(null,"login failed")
+//     }
+// }
+// loginhandler("ptomer0","123",login)
+
+
+
+// console.log("one")
+// // for(i=1;i<=1000;i++){
+// setTimeout(() => {
+//     console.log("two")
+    
+// },100);
+
+// console.log("three")
+
+
+
+// setTimeout(() => {
+//     console.log("one")
+//     setTimeout(() => {
+//         console.log("two")
+//         setTimeout(() => {
+//             console.log("three")
+//             setTimeout(() => {
+//                 console.log("four")
+//                 setTimeout(() => {
+//                     console.log("five")
+//                     setTimeout(() => {
+//                         console.log("six")
+//                     }, 100);
+//                 }, 100);
+//             }, 100);
+//         }, 100);
+// }, 100);
+
+// }, 100);
+    const Mypromise=new Promise((resolve,reject)=>{
+    const username="aloksingh055";
+    const password="123456";
+    if(username=="aloksingh055" && password=="123456"){
+        resolve("Logine Success");
+
     }else{
-        console.log("msg is " + msg)
+        reject("username or password are incorrect ")
+    }
+})
+const Mypromis=new Promise((resolve,reject)=>{
+    const usernam="aloksingh055";
+    const passwor="123456";
+    if(usernam=="aloksingh055" && passwor=="123456"){
+        resolve("order accept");
+
+    }else{
+        reject("order decline ")
+    }
+})
+
+// const Mypromise=new Promise((resolve,reject)=>{
+//     const num =12;
+    
+//     if(num%2==0 ){
+//         resolve("succes");
+
+//     }else{
+//         reject("failed ")
+//     }
+// })
+
+
+
+
+// Mypromise.then((msg)=>{
+//     console.log(msg)
+// }).catch((msg)=>{
+//     console.log(msg)
+// }).finally(()=>{
+//     console.log("All done")
+// })
+async function handledata(){
+    try{ 
+      console.log("data")
+      const msg= await Mypromise;
+       console.log(msg)
+       if (msg === "Logine Success") {
+            const ms = await Mypromis;
+            console.log(ms);
+        }
+
+    }catch(err){
+        console.log(err)
+    }
+    finally{
+        console.log("All done")
     }
 }
-function loginhandler(username,password,callback){
-    if(username == "ptomer40" && password == "123"){
-        callback(" success",null)
-    }else{
-        callback(null,"login failed")
-    }
-}
-loginhandler("ptomer0","123",login)
+handledata();
