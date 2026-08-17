@@ -178,14 +178,54 @@
 //     });
 // fetch data from API
 
-const button=document.getElementById('fetchData')
-const container=document.getElementById('container')
+const button = document.getElementById('fetchData');
+const container = document.getElementById('container');
 
-console.log(button)
-async function fetchData(){
-    const serverData= await fetch('https://fakestoreapi.com/products')
-    const jsondata= await serverData.json()
-    console.log(jsondata)
-    container.innerHTML= JSON.stringify(`${jsondata}`)
+const loading = document.createElement('div');
+container.appendChild(loading);
+
+console.log(button);
+
+async function fetchData() {
+    try {
+        loading.innerHTML = "<h2>Loading data...</h2>";
+
+        const serverData = await fetch(
+            'https://fakestoreapi.com/products'
+        );
+
+        const jsondata = await serverData.json();
+
+        console.log(jsondata);
+
+        let table = `
+            <table border="4">
+                <tr>
+                    <th>ITEM_ID</th>
+                    <th>TITLE</th>
+                    <th>PRICE</th>
+                </tr>
+
+                ${jsondata.map((ele) => `
+                    <tr>
+                    <td><img src="${ele.image}" alt="${ele.title}" width="50" height="50"></td>
+                        <td>${ele.id}</td>
+                        <td>${ele.title}</td>
+                        <td>${ele.price}</td>
+                    </tr>
+                `).join('')}
+
+            </table>
+        `;
+
+        container.innerHTML = table;
+
+    } catch (e) {
+        loading.innerHTML = "<h2>Error fetching data</h2>";
+        console.log(e);
+    } finally {
+        loading.innerHTML = "";
+    }
 }
-button.addEventListener('click', fetchData)
+
+button.addEventListener('click', fetchData);
